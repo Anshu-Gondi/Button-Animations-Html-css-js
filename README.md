@@ -37,3 +37,10 @@ This repository provides a comprehensive collection of techniques for creating s
 2. Explore the index.html file to view different button examples.
 3. Open the code in any text editor to learn the implementation details.
 4. Customize the styles and scripts as per your needs.
+
+---
+
+## **Learn More on YouTube**
+To enhance your learning, check out the following YouTube resources:
+- [AG YouTube Channel](https://youtube.com/@ag_youtube?si=fqCwoa7L0GxmRxFw)
+- [YouTube Playlist on Button Animations](https://youtube.com/playlist?list=PL3l9R-9NijmDQPCZDbeBDUB8cMdWSITVh&si=JZHI8Uajy9xww7ML)
