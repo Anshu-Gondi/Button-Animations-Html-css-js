@@ -1,0 +1,197 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #000;
+    color: #fff;
+    font-family: 'Orbitron', sans-serif;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.box-2 {
+    text-align: center;
+}
+
+.btn-two {
+    position: relative;
+    padding: 15px 50px;
+    font-size: 20px;
+    text-transform: uppercase;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    overflow: visible;
+    color: #fff;
+    z-index: 1;
+}
+
+.btn-two span {
+    position: relative;
+    z-index: 3;
+}
+
+/* SABER HANDLES */
+.handle {
+    position: absolute;
+    width: 14px;
+    height: 25px;
+    background: #333;
+    border: 2px solid #777;
+    border-radius: 3px;
+    z-index: 2;
+}
+
+.top-handle {
+    top: -45px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.bottom-handle {
+    bottom: -45px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* Left saber handles */
+#top-left1, #left-bottom1 {
+    left: 10%;
+}
+
+#top-left2, #left-bottom2 {
+    left: 30%;
+}
+
+/* SABER BEAMS */
+.btn-two::before,
+.btn-two::after {
+    content: '';
+    position: absolute;
+    height: 4px;
+    width: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 2px;
+    z-index: 1;
+    transform-origin: center center;
+    transition: width 0.4s ease;
+}
+
+.btn-two::before {
+    top: -30px;
+    background: #0ff;
+}
+
+.btn-two::after {
+    bottom: -30px;
+    background: #f00;
+}
+
+/* Left Saber beams */
+.btn-two::before, .btn-two::after {
+    animation: spin-cw 1s linear infinite;
+}
+
+/* Flicker */
+@keyframes flicker-blue {
+    0%, 100% { box-shadow: 0 0 10px #0ff, 0 0 20px #0ff; }
+    50% { box-shadow: 0 0 5px #0ff, 0 0 15px #0ff; }
+}
+
+@keyframes flicker-red {
+    0%, 100% { box-shadow: 0 0 10px #f00, 0 0 20px #f00; }
+    50% { box-shadow: 0 0 5px #f00, 0 0 15px #f00; }
+}
+
+/* SPIN ANIMATIONS */
+@keyframes spin-cw {
+    from { transform: rotate(0deg) translateX(-50%); }
+    to { transform: rotate(360deg) translateX(-50%); }
+}
+
+@keyframes spin-ccw {
+    from { transform: rotate(0deg) translateX(-50%); }
+    to { transform: rotate(-360deg) translateX(-50%); }
+}
+
+/* Update hover effects for left and right lightsabers */
+.btn-two:hover::before {
+    width: 180px;
+    animation: spin-cw 1s linear infinite, flicker-blue 0.3s infinite, clash-tilt 0.3s ease-in-out;
+}
+
+.btn-two:hover::after {
+    width: 180px;
+    animation: spin-ccw 1s linear infinite, flicker-red 0.3s infinite, clash-tilt 0.3s ease-in-out;
+}
+
+#top-left1:hover {
+  animation: spin-cw 2s linear infinite, flicker-blue 0.3s infinite;
+}
+
+#top-left2:hover {
+  animation: spin-cw 2s linear infinite, flicker-blue 0.3s infinite;
+}
+
+.btn-two:hover .spark {
+    animation: spark-flicker 0.3s infinite;
+}
+
+@keyframes spark-flicker {
+    0%, 100% { opacity: 0.8; transform: translate(-50%, -50%) scale(1); }
+    50% { opacity: 0.3; transform: translate(-50%, -50%) scale(1.5); }
+}
+
+/* SABER CLASH EFFECT (Tilt and spark) */
+@keyframes clash-tilt {
+    0% { transform: rotate(0deg); }
+    50% { transform: rotate(15deg); }
+    100% { transform: rotate(0deg); }
+}
+
+@keyframes clash-sparks {
+    0%, 100% { opacity: 0; }
+    50% { opacity: 1; transform: scale(1.5); }
+}
+
+/* Center Saber */
+.saber-ignite {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 4px;
+    height: 0;
+    background: linear-gradient(to bottom, #0ff, #f00);
+    box-shadow: 0 0 20px #0ff, 0 0 20px #f00;
+    transform: translate(-50%, -50%);
+    z-index: 0;
+    transition: height 0.4s ease;
+}
+
+.btn-two:hover .saber-ignite {
+    height: 200%;
+}
+
+/* SCREEN FLASH EFFECT */
+.screen-flash {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(255, 255, 255, 0.8);
+    opacity: 0;
+    pointer-events: none;
+    z-index: 9999;
+    transition: opacity 0.1s ease-in-out;
+}
+
+.screen-flash.flash {
+    opacity: 0.02;
+}

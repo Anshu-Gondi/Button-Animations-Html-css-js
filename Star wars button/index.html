@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ultimate Lightsaber Button</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="box-2">
+    <div class="btn btn-two">
+      <div class="handle top-handle" id="top-right"></div>
+      <div class="handle bottom-handle" id="bottom-right"></div>
+      <div class="handle top-handle" id="top-left"></div>
+      <div class="handle bottom-handle" id="left-bottom "></div>
+      <span>HOVER ME</span>
+      <div class="saber-ignite"></div>
+      <div class="spark"></div>
+    </div>
+  </div>
+
+  <!-- Saber ignition sound -->
+  <audio id="saberSound" src="lightsaber-ignition-6816.mp3" preload="auto"></audio>
+
+  <!-- Hum sound (looped) -->
+  <audio id="humSound" src="saber-hummingwav-14651.mp3" preload="auto" loop></audio>
+
+  <!-- Screen flash effect -->
+  <div class="screen-flash"></div>
+
+  <script>
+    const btn = document.querySelector('.btn-two');
+    const saberSound = document.getElementById('saberSound');
+    const humSound = document.getElementById('humSound');
+    const screenFlash = document.querySelector('.screen-flash');
+
+    btn.addEventListener('mouseenter', () => {
+      saberSound.currentTime = 0;
+      saberSound.play();
+      humSound.play();
+      screenFlash.classList.add('flash');
+    });
+
+    btn.addEventListener('mouseleave', () => {
+      humSound.pause();
+      humSound.currentTime = 0;
+      screenFlash.classList.remove('flash');
+    });
+  </script>
+</body>
+</html>
