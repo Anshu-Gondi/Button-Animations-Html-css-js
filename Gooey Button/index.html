@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Gooey Button</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="center-wrapper">
+    <div class="gooey-container">
+      <button class="gooey-button">Gooey Button</button>
+      <div class="blobs">
+        <div class="blob"></div>
+        <div class="blob"></div>
+        <div class="blob"></div>
+        <div class="blob"></div>
+        <div class="blob"></div>
+        <div class="blob"></div>
+        <div class="blob"></div>
+        <div class="blob"></div>
+        <div class="blob"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SVG filter for gooey effect -->
+  <svg>
+    <filter id="goo">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="12" result="blur"/>
+      <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  
+        0 1 0 0 0  
+        0 0 1 0 0  
+        0 0 0 25 -10" result="goo"/>
+      <feComposite in="SourceGraphic" in2="goo" operator="atop"/>
+    </filter>
+  </svg>
+
+  <!-- Gooey click sound -->
+  <audio id="gooeySound" src="sounds/cyber_gooey_click.mp3" preload="auto"></audio>
+
+  <script src="script.js"></script>
+</body>
+</html>
