@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Multicolor Swirl Button</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <button class="svg-button" id="magicButton">
+    <span>Hover Me</span>
+    <svg class="swirl" viewBox="0 0 200 60" preserveAspectRatio="none">
+      <defs>
+        <linearGradient id="rainbowGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#ff00cc" />
+          <stop offset="25%" stop-color="#ff9900" />
+          <stop offset="50%" stop-color="#33cc33" />
+          <stop offset="75%" stop-color="#00ccff" />
+          <stop offset="100%" stop-color="#9933ff" />
+        </linearGradient>
+      </defs>
+      <path class="trail" d="M10,30 q40,-20 80,0 q40,20 80,0" />
+      <path class="trail2" d="M10,35 q40,-10 80,0 q40,10 80,0" />
+    </svg>
+  </button>
+
+  <script>
+    const button = document.getElementById('magicButton');
+
+    button.addEventListener('click', e => {
+      const ripple = document.createElement('span');
+      ripple.classList.add('ripple');
+      ripple.style.left = `${e.offsetX}px`;
+      ripple.style.top = `${e.offsetY}px`;
+      button.appendChild(ripple);
+      setTimeout(() => ripple.remove(), 600);
+    });
+
+    button.addEventListener('mouseenter', () => {
+      for (let i = 0; i < 6; i++) {
+        const sparkle = document.createElement('span');
+        sparkle.className = 'sparkle';
+        sparkle.style.left = `${Math.random() * 100}%`;
+        sparkle.style.top = `${Math.random() * 100}%`;
+        sparkle.style.setProperty('--x', `${Math.random() * 80 - 40}px`);
+        sparkle.style.setProperty('--y', `${Math.random() * -60}px`);
+        sparkle.style.background = `hsl(${Math.random() * 360}, 100%, 70%)`;
+        button.appendChild(sparkle);
+        setTimeout(() => sparkle.remove(), 1000);
+      }
+    });
+  </script>
+</body>
+</html>
