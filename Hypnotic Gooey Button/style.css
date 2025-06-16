@@ -1,0 +1,171 @@
+body {
+  background: radial-gradient(circle at center, #000000 0%, #0a0a0a 100%);
+  height: 100vh;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Orbitron', sans-serif;
+  overflow: hidden;
+  --fogX: 0px;
+  --fogY: 0px;
+  position: relative;
+}
+
+body::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.02) 20%, transparent 80%),
+              radial-gradient(circle, rgba(255, 255, 255, 0.015) 10%, transparent 80%);
+  animation: fogMove 60s linear infinite;
+  transform: translate(var(--fogX), var(--fogY));
+  z-index: 0;
+  filter: blur(50px) contrast(120%);
+  pointer-events: none;
+}
+
+@keyframes fogMove {
+  0% { transform: rotate(0deg) scale(1.1); }
+  100% { transform: rotate(360deg) scale(1.1); }
+}
+
+.button-wrapper {
+  filter: url('#goo');
+  position: relative;
+  z-index: 1;
+}
+
+.button-wrapper::after {
+  content: '';
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, #00eaff88, transparent 70%);
+  border-radius: 50%;
+  filter: blur(80px);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.hypnotic-gooey-button {
+  position: relative;
+  padding: 22px 60px;
+  font-size: 1.3rem;
+  letter-spacing: 4px;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid rgba(255, 255, 255, 0.25);
+  border-radius: 25px;
+  cursor: pointer;
+  overflow: hidden;
+  z-index: 2;
+  backdrop-filter: blur(14px) saturate(180%);
+  box-shadow: 0 0 20px #00eaff33, 0 0 60px #ff00c855;
+  transition: all 0.35s ease;
+}
+
+.hypnotic-gooey-button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 30px #00eaff, 0 0 100px #ff00c8;
+}
+
+.hypnotic-gooey-button span {
+  position: relative;
+  z-index: 4;
+  font-weight: 900;
+  font-size: 1.5rem;
+  color: #ffffff;
+  background: linear-gradient(90deg, #00eaff, #ff00c8);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: flicker 2s infinite alternate, shineText 5s linear infinite;
+  text-shadow:
+    0 0 5px #00eaff,
+    0 0 10px #00eaff,
+    0 0 15px #ff00c8;
+}
+
+@keyframes shineText {
+  to {
+    background-position: 200% center;
+  }
+}
+
+@keyframes flicker {
+  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+    opacity: 1;
+    text-shadow:
+      0 0 5px #00eaff,
+      0 0 10px #ff00c8,
+      0 0 20px #00eaff;
+  }
+  20%, 22%, 55% {
+    opacity: 0.4;
+    text-shadow: none;
+  }
+}
+
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle, #ff00c8, #00eaff);
+  filter: blur(40px);
+  opacity: 0.45;
+  mix-blend-mode: screen;
+  animation: swirl 6s linear infinite, float 5s ease-in-out infinite;
+}
+
+.blob:nth-child(2) {
+  width: 100px;
+  height: 100px;
+  top: 40%;
+  left: 20%;
+  animation-delay: 0.6s;
+}
+
+.blob:nth-child(3) {
+  width: 140px;
+  height: 140px;
+  top: 60%;
+  left: 70%;
+  animation-delay: 1.2s;
+}
+
+.blob:nth-child(4) {
+  width: 120px;
+  height: 120px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@keyframes swirl {
+  0%   { transform: translate(-50%, -50%) rotate(0deg); }
+  100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translate(-50%, -50%) translateY(-12px); }
+  50%      { transform: translate(-50%, -50%) translateY(12px); }
+}
+
+svg {
+  position: absolute;
+  width: 0;
+  height: 0;
+}
+
+@media (max-width: 768px) {
+  .hypnotic-gooey-button {
+    padding: 14px 30px;
+    font-size: 1rem;
+  }
+}
