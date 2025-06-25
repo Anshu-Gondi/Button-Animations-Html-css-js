@@ -1,0 +1,119 @@
+/* Fullscreen Centering */
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background: #0c0c0c;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .center-container {
+      text-align: center;
+    }
+
+    .anime-game-button {
+      position: relative;
+      padding: 12px 36px 12px 24px;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 18px;
+      color: #00fff2;
+      background: transparent;
+      border: 2px solid #00fff2;
+      border-radius: 10px;
+      cursor: pointer;
+      overflow: hidden;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      box-shadow: 0 0 10px #00fff2, inset 0 0 5px #00fff2;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: 0.3s ease-in-out;
+      z-index: 1;
+    }
+
+    .anime-game-button:hover {
+      color: #0f0;
+      border-color: #0f0;
+      box-shadow: 0 0 20px #0f0, inset 0 0 10px #0f0;
+      transform: scale(1.05);
+    }
+
+    .button-light {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(0,255,255,0.3), transparent 60%);
+      animation: pulse 2s infinite;
+      z-index: 0;
+    }
+
+    .button-text {
+      position: relative;
+      z-index: 1;
+    }
+
+    .icon {
+      width: 28px;
+      height: 28px;
+      z-index: 1;
+    }
+
+    /* Glitch Effect */
+    .glitch-text {
+      position: relative;
+      animation: glitch-skew 2s infinite linear alternate-reverse;
+    }
+    .glitch-text::before,
+    .glitch-text::after {
+      content: '▶ SUBSCRIBE';
+      position: absolute;
+      left: 0;
+      top: 0;
+      opacity: 0.7;
+      clip: rect(0, 0, 0, 0);
+    }
+    .glitch-text::before {
+      animation: glitch-top 1.5s infinite linear alternate-reverse;
+      color: #ff00c8;
+      z-index: 2;
+    }
+    .glitch-text::after {
+      animation: glitch-bottom 1.5s infinite linear alternate-reverse;
+      color: #00ffea;
+      z-index: 3;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(0.8); opacity: 0.4; }
+      50% { transform: scale(1.2); opacity: 0.7; }
+      100% { transform: scale(0.8); opacity: 0.4; }
+    }
+
+    @keyframes glitch-skew {
+      0% { transform: skew(0deg); }
+      20% { transform: skew(-2deg); }
+      40% { transform: skew(2deg); }
+      60% { transform: skew(-1deg); }
+      80% { transform: skew(1deg); }
+      100% { transform: skew(0deg); }
+    }
+
+    @keyframes glitch-top {
+      0% { clip: rect(0, 9999px, 0, 0); transform: translate(0px, 0px); }
+      10% { clip: rect(5px, 9999px, 15px, 0); transform: translate(-2px, -2px); }
+      20% { clip: rect(10px, 9999px, 20px, 0); transform: translate(2px, -1px); }
+      100% { clip: rect(0, 9999px, 0, 0); transform: translate(0px, 0px); }
+    }
+
+    @keyframes glitch-bottom {
+      0% { clip: rect(0, 9999px, 0, 0); transform: translate(0px, 0px); }
+      10% { clip: rect(5px, 9999px, 15px, 0); transform: translate(2px, 2px); }
+      20% { clip: rect(10px, 9999px, 20px, 0); transform: translate(-2px, 1px); }
+      100% { clip: rect(0, 9999px, 0, 0); transform: translate(0px, 0px); }
+    }
