@@ -1,0 +1,344 @@
+:root {
+  --y0: #fff8b5; /* highlight */
+
+  --y1: #ffd400; /* primary neon */
+
+  --y2: #ffb100; /* warm edge */
+
+  --bg: #0b0e13; /* canvas */
+
+  --txt: #0a0a0a; /* inner text */
+}
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+
+  background: radial-gradient(
+      1200px 600px at 70% -10%,
+      #131722 0%,
+      transparent 60%
+    ),
+    radial-gradient(1000px 600px at -10% 110%, #0e1119 0%, transparent 60%),
+    var(--bg);
+
+  color: #e9ecf1;
+
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto,
+    "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+
+  display: grid;
+
+  place-items: center;
+
+  padding: 2.5rem;
+}
+
+.wrap {
+  display: grid;
+
+  gap: 1.25rem;
+
+  justify-items: center;
+}
+
+/* ===== The Button ===== */
+
+.neo-btn {
+  --radius: 16px;
+
+  --pad-y: 0.95rem;
+
+  --pad-x: 1.35rem;
+
+  --borderW: 2px;
+
+  position: relative;
+
+  display: inline-grid;
+
+  place-items: center;
+
+  gap: 0.5rem;
+
+  padding: var(--pad-y) calc(var(--pad-x) * 1.6);
+
+  border-radius: var(--radius);
+
+  border: var(--borderW) solid rgba(255, 255, 255, 0.12);
+
+  background: linear-gradient(
+    135deg,
+    var(--y1) 0%,
+    var(--y2) 40%,
+    #ffcf3f 60%,
+    var(--y1) 100%
+  );
+
+  background-size: 200% 200%;
+
+  color: var(--txt);
+
+  font-weight: 800;
+
+  letter-spacing: 0.4px;
+
+  text-transform: uppercase;
+
+  cursor: pointer;
+
+  user-select: none;
+
+  -webkit-tap-highlight-color: transparent;
+
+  transform-style: preserve-3d;
+
+  transition: transform 180ms cubic-bezier(0.21, 0.98, 0.6, 0.99),
+    box-shadow 220ms ease, filter 220ms ease;
+
+  box-shadow: 0 6px 18px rgba(255, 204, 0, 0.15),
+    0 2px 0 rgba(255, 255, 255, 0.25) inset,
+    0 -6px 18px rgba(255, 174, 0, 0.25) inset, 0 0 0 1px rgba(255, 214, 0, 0.25);
+
+  outline: none;
+
+  overflow: hidden;
+
+  isolation: isolate;
+}
+
+/* Animated border glow (conic gradient ring) */
+
+.neo-btn::before {
+  content: "";
+
+  position: absolute;
+
+  inset: -2px;
+
+  border-radius: calc(var(--radius) + 4px);
+
+  background: conic-gradient(
+    from var(--glow-angle, 0deg),
+    rgba(255, 214, 0, 0) 0deg,
+
+    rgba(255, 214, 0, 0.45) 70deg,
+
+    rgba(255, 214, 0, 0) 140deg,
+
+    rgba(255, 214, 0, 0.65) 210deg,
+
+    rgba(255, 214, 0, 0) 360deg
+  );
+
+  filter: blur(12px) saturate(1.15);
+
+  z-index: -1;
+
+  animation: spin 6s linear infinite;
+}
+
+/* Shiny sweep */
+
+.neo-btn::after {
+  content: "";
+
+  position: absolute;
+
+  inset: -40% -120%;
+
+  background: linear-gradient(
+    110deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.55) 50%,
+    transparent 70%
+  );
+
+  transform: translateX(var(--shine-x, -60%)) rotate(8deg);
+
+  animation: shine 2.6s ease-in-out infinite;
+
+  pointer-events: none;
+}
+
+/* Label + icon */
+
+.neo-btn .inner {
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 0.65rem;
+
+  position: relative;
+
+  z-index: 2;
+}
+
+.neo-btn .spark {
+  font-size: 1.15rem;
+  filter: drop-shadow(0 0 6px rgba(255, 220, 60, 0.9));
+}
+
+/* Hover / Active states */
+
+.neo-btn:hover {
+  transform: translateY(-2px);
+
+  box-shadow: 0 10px 28px rgba(255, 204, 0, 0.28),
+    0 2px 0 rgba(255, 255, 255, 0.25) inset,
+    0 -8px 22px rgba(255, 174, 0, 0.28) inset, 0 0 0 1px rgba(255, 214, 0, 0.35);
+
+  filter: saturate(1.08);
+}
+
+.neo-btn:active {
+  transform: translateY(1px) scale(0.995);
+
+  box-shadow: 0 4px 12px rgba(255, 204, 0, 0.22),
+    0 2px 0 rgba(255, 255, 255, 0.22) inset,
+    0 -8px 22px rgba(255, 174, 0, 0.22) inset, 0 0 0 1px rgba(255, 214, 0, 0.3);
+}
+
+/* Glowing pulse */
+
+@keyframes spin {
+  to {
+    --glow-angle: 360deg;
+  }
+}
+
+@keyframes shine {
+  0% {
+    --shine-x: -75%;
+  }
+  60% {
+    --shine-x: 55%;
+  }
+  100% {
+    --shine-x: 75%;
+  }
+}
+
+/* Ripple effect */
+
+.ripple {
+  position: absolute;
+
+  border-radius: 999px;
+
+  transform: translate(-50%, -50%);
+
+  pointer-events: none;
+
+  width: 20px;
+  height: 20px;
+
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.75) 0%,
+    rgba(255, 255, 255, 0.55) 40%,
+    rgba(255, 255, 255, 0) 70%
+  );
+
+  mix-blend-mode: screen;
+
+  animation: ripple 700ms ease-out forwards;
+
+  z-index: 1;
+}
+
+@keyframes ripple {
+  from {
+    opacity: 0.75;
+  }
+
+  to {
+    opacity: 0;
+    width: 520px;
+    height: 520px;
+  }
+}
+
+/* Spark burst */
+
+.sparkle {
+  --tx: 0;
+  --ty: 0;
+  --rot: 0deg;
+  --delay: 0ms;
+  --size: 6px;
+
+  position: absolute;
+
+  width: var(--size);
+  height: var(--size);
+
+  border-radius: 50%;
+
+  background: radial-gradient(circle, #fff5bb 0%, #ffe04e 50%, #ffb300 100%);
+
+  box-shadow: 0 0 10px rgba(255, 213, 0, 0.85), 0 0 22px rgba(255, 188, 0, 0.45);
+
+  transform: translate(-50%, -50%) rotate(var(--rot))
+    translate(var(--tx), var(--ty));
+
+  opacity: 0;
+
+  animation: pop 600ms cubic-bezier(0.2, 0.8, 0.2, 1) var(--delay) forwards;
+
+  filter: saturate(1.2);
+
+  z-index: 1;
+}
+
+@keyframes pop {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, -50%) rotate(var(--rot)) translate(0, 0)
+      scale(0.6);
+  }
+
+  80% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) rotate(var(--rot))
+      translate(var(--tx), var(--ty)) scale(0.9);
+  }
+}
+
+/* Focus-visible for accessibility */
+
+.neo-btn:focus-visible {
+  outline: 3px solid #fff7c2;
+
+  outline-offset: 4px;
+}
+
+/* Reduce motion preference */
+
+@media (prefers-reduced-motion: reduce) {
+  .neo-btn,
+  .neo-btn::before,
+  .neo-btn::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* Optional label */
+
+.note {
+  opacity: 0.7;
+  font-size: 0.925rem;
+}
