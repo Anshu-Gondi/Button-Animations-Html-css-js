@@ -1,0 +1,178 @@
+body {
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  height: 100vh;
+
+  background: #0d0d0d;
+}
+
+.spark-btn {
+  position: relative;
+
+  padding: 15px 40px;
+
+  font-size: 24px;
+
+  font-weight: bold;
+
+  color: white;
+
+  background: linear-gradient(45deg, #ff00ff, #00ffff, #00ff66);
+
+  border: none;
+
+  border-radius: 12px;
+
+  cursor: pointer;
+
+  overflow: hidden;
+
+  box-shadow: 0 0 15px rgba(0, 255, 200, 0.5);
+
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+
+/* Hover glow */
+
+.spark-btn:hover {
+  transform: scale(1.1);
+
+  box-shadow: 0 0 35px rgba(255, 0, 255, 0.8), 0 0 45px rgba(0, 255, 200, 0.9);
+}
+
+/* Pulsing Ripple */
+
+.spark-btn::after {
+  content: "";
+
+  position: absolute;
+
+  top: 50%;
+
+  left: 50%;
+
+  width: 200%;
+
+  height: 200%;
+
+  background: radial-gradient(
+    circle,
+    rgba(255, 0, 255, 0.3) 20%,
+    transparent 70%
+  );
+
+  transform: translate(-50%, -50%) scale(0);
+
+  border-radius: 50%;
+
+  animation: ripple 2s infinite;
+
+  pointer-events: none;
+}
+
+@keyframes ripple {
+  0% {
+    transform: translate(-50%, -50%) scale(0.4);
+
+    opacity: 0.7;
+  }
+
+  70% {
+    transform: translate(-50%, -50%) scale(1.5);
+
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+/* Sparks container */
+
+.sparks {
+  position: absolute;
+
+  top: 0;
+
+  left: 0;
+
+  width: 100%;
+
+  height: 100%;
+
+  overflow: visible;
+
+  pointer-events: none;
+}
+
+.spark {
+  position: absolute;
+
+  width: 5px;
+
+  height: 5px;
+
+  border-radius: 50%;
+
+  opacity: 0.9;
+
+  animation: fly 2s linear forwards;
+
+  box-shadow: 0 0 8px currentColor, 0 0 15px currentColor;
+}
+
+@keyframes fly {
+  from {
+    transform: translate(0, 0) scale(1);
+
+    opacity: 1;
+  }
+
+  to {
+    transform: translate(var(--x), var(--y)) scale(0.3);
+
+    opacity: 0;
+  }
+}
+
+/* Animated neon gradient text */
+
+.btn-text {
+  background: linear-gradient(
+    270deg,
+    #ff00ff,
+    #00ffff,
+    #ffff00,
+    #ff6600,
+    #00ff66
+  );
+
+  background-size: 600% 600%;
+
+  -webkit-background-clip: text;
+
+  -webkit-text-fill-color: transparent;
+
+  animation: neonText 6s ease infinite;
+
+  text-shadow: 0 0 10px rgba(255, 0, 255, 0.7), 0 0 20px rgba(0, 255, 200, 0.7);
+}
+
+@keyframes neonText {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
